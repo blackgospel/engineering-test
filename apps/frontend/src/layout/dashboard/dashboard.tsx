@@ -51,6 +51,8 @@ export const DashboardLayout = () => {
           width={{ sm: 200, lg: 300 }}
         >
           {ROUTE_PATHS.map(({ icon, color, name, path }) => {
+            const activePath = pathname.includes(path);
+
             return (
               <UnstyledButton
                 key={name}
@@ -72,6 +74,20 @@ export const DashboardLayout = () => {
                         ? theme.colors.dark[6]
                         : theme.colors.gray[0],
                   },
+
+                  ...(activePath && {
+                    backgroundColor:
+                      theme.colorScheme === 'dark'
+                        ? theme.fn.rgba(theme.fn.themeColor(color, 3), 0.2)
+                        : theme.fn.rgba(theme.fn.themeColor(color, 7), 0.6),
+
+                    '&:hover': {
+                      backgroundColor:
+                        theme.colorScheme === 'dark'
+                          ? theme.fn.rgba(theme.fn.themeColor(color, 3), 0.2)
+                          : theme.fn.rgba(theme.fn.themeColor(color, 6), 0.4),
+                    },
+                  }),
                 })}
               >
                 <Group>

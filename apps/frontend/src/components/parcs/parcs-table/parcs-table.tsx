@@ -22,8 +22,8 @@ export const ParcsTable: React.FC<IParcTableProps> = ({ data }) => {
         header: 'Name',
       },
       {
-        accessorKey: 'email',
-        header: 'Email',
+        accessorKey: 'description',
+        header: 'Description',
       },
     ],
     []

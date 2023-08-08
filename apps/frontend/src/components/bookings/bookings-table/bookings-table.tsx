@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import {
   MantineReactTable,
   useMantineReactTable,
@@ -18,12 +19,25 @@ export const BookingsTable: React.FC<IBookingTableProps> = ({ data }) => {
         header: 'ID',
       },
       {
-        accessorKey: 'name',
-        header: 'Name',
+        accessorKey: 'user',
+        header: 'User ID',
       },
       {
-        accessorKey: 'email',
-        header: 'Email',
+        accessorKey: 'parc',
+        header: 'Parc ID',
+      },
+      {
+        accessorKey: 'bookingdate',
+        header: 'Date',
+        Cell: ({ cell }) => (
+          <>
+            {dayjs(cell.renderValue() as string).format('MMMM D, YYYY h:mm A')}
+          </>
+        ),
+      },
+      {
+        accessorKey: 'comments',
+        header: 'Comments',
       },
     ],
     []

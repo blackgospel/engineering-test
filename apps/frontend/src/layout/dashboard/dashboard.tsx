@@ -13,24 +13,10 @@ import {
   useMantineColorScheme,
   useMantineTheme,
 } from '@mantine/core';
-import { IconMoonStars, IconSun, IconUser } from '@tabler/icons-react';
+import { IconMoonStars, IconSun } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-
-const data = [
-  {
-    icon: <IconUser size="1rem" />,
-    color: 'blue',
-    label: 'Users',
-    path: 'users',
-  },
-  // {
-  //   icon: <IconAlertCircle size="1rem" />,
-  //   color: 'teal',
-  //   label: 'Open Issues',
-  // },
-  // { icon: <IconMessages size="1rem" />, color: 'violet', label: 'Discussions' },
-];
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { ROUTE_PATHS } from '../../routes/paths';
 
 export const DashboardLayout = () => {
   const theme = useMantineTheme();
@@ -64,10 +50,12 @@ export const DashboardLayout = () => {
           hidden={!opened}
           width={{ sm: 200, lg: 300 }}
         >
-          {data.map(({ icon, color, label }) => {
+          {ROUTE_PATHS.map(({ icon, color, name, path }) => {
             return (
               <UnstyledButton
-                key={label}
+                key={name}
+                component={Link}
+                to={path}
                 sx={(theme) => ({
                   display: 'block',
                   width: '100%',
@@ -91,7 +79,7 @@ export const DashboardLayout = () => {
                     {icon}
                   </ThemeIcon>
 
-                  <Text size="sm">{label}</Text>
+                  <Text size="sm">{name}</Text>
                 </Group>
               </UnstyledButton>
             );

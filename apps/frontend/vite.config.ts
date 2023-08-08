@@ -1,6 +1,7 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+import dynamicImport from 'vite-plugin-dynamic-import';
 import viteTsConfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
@@ -9,6 +10,9 @@ export default defineConfig({
   server: {
     port: 4200,
     host: 'localhost',
+    proxy: {
+      '/api': { target: 'http://localhost:3001', changeOrigin: true },
+    },
   },
 
   preview: {
@@ -17,20 +21,12 @@ export default defineConfig({
   },
 
   plugins: [
+    dynamicImport(),
     react(),
     viteTsConfigPaths({
       root: '../../',
     }),
   ],
-
-  // Uncomment this if you are using workers.
-  // worker: {
-  //  plugins: [
-  //    viteTsConfigPaths({
-  //      root: '../../',
-  //    }),
-  //  ],
-  // },
 
   define: {
     'import.meta.vitest': undefined,

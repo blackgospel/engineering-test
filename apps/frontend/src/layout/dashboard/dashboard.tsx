@@ -100,7 +100,7 @@ export const DashboardLayout = () => {
       }
       footer={
         <Footer height={60} p="md">
-          Application footer
+          Oluseun Adesina
         </Footer>
       }
       header={

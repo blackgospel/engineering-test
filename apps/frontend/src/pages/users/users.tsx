@@ -1,65 +1,21 @@
-import { faker } from '@faker-js/faker';
-import {
-  MantineReactTable,
-  useMantineReactTable,
-  type MRT_ColumnDef,
-} from 'mantine-react-table';
-import { useMemo } from 'react';
-
-type Person = {
-  name: {
-    firstName: string;
-    lastName: string;
-  };
-  address: string;
-  city: string;
-  state: string;
-};
-
-const data: Person[] = [...Array(100)].map(() => ({
-  name: {
-    firstName: faker.person.firstName(),
-    lastName: faker.person.lastName(),
-  },
-  address: faker.location.streetAddress(),
-  city: faker.location.city(),
-  state: faker.location.state(),
-}));
+import { Box } from '@mantine/core';
+import { UsersTable } from '../../components';
+import { useGetAllUsersQuery } from '../../redux';
 
 export const UsersPage = () => {
-  const columns = useMemo<MRT_ColumnDef<Person>[]>(
-    () => [
-      {
-        accessorKey: 'name.firstName', //access nested data with dot notation
-        header: 'First Name',
-      },
-      {
-        accessorKey: 'name.lastName',
-        header: 'Last Name',
-      },
-      {
-        accessorKey: 'address', //normal accessorKey
-        header: 'Address',
-      },
-      {
-        accessorKey: 'city',
-        header: 'City',
-      },
-      {
-        accessorKey: 'state',
-        header: 'State',
-      },
-    ],
-    []
-  );
+  const { data, isLoading, error } = useGetAllUsersQuery();
 
-  const table = useMantineReactTable({
-    columns,
-    data,
-    initialState: {
-      density: 'xs',
-    },
-  });
+  if (isLoading) {
+    return <Box>Loading...</Box>;
+  }
 
-  return <MantineReactTable table={table} />;
+  if (error) {
+    return <Box>Error occurred</Box>;
+  }
+
+  if (!data) {
+    return <Box>No Data</Box>;
+  }
+
+  return <UsersTable data={data} />;
 };

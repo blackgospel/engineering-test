@@ -4,7 +4,9 @@ import {
   MantineProvider,
 } from '@mantine/core';
 import { useState } from 'react';
+import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
+import { store } from '../redux';
 import { AppRoutes } from '../routes/routes';
 
 export function App() {
@@ -22,7 +24,9 @@ export function App() {
         withGlobalStyles
         withNormalizeCSS
       >
-        <RouterProvider router={AppRoutes} />
+        <Provider store={store}>
+          <RouterProvider router={AppRoutes} />
+        </Provider>
       </MantineProvider>
     </ColorSchemeProvider>
   );

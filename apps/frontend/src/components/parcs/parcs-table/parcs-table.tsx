@@ -1,10 +1,10 @@
+import { IParcSchema } from '@eurocamp/schema';
 import {
   MantineReactTable,
   useMantineReactTable,
   type MRT_ColumnDef,
 } from 'mantine-react-table';
 import { useMemo } from 'react';
-import { IParcSchema } from '../../../schema';
 
 interface IParcTableProps {
   data: IParcSchema[];

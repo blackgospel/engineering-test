@@ -1,14 +1,14 @@
+import { IUserSchema } from '@eurocamp/schema';
 import { Button, Menu } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconTrash } from '@tabler/icons-react';
-import { useDeleteUserMutation } from 'apps/frontend/src/redux';
 import {
   MantineReactTable,
   useMantineReactTable,
   type MRT_ColumnDef,
 } from 'mantine-react-table';
 import { useMemo } from 'react';
-import { IUserSchema } from '../../../schema';
+import { useDeleteUserMutation } from '../../../redux';
 import { CreateUserModal } from '../create-user-modal';
 
 interface IUsersTableProps {
@@ -56,7 +56,7 @@ export const UsersTable: React.FC<IUsersTableProps> = ({ data }) => {
         </Menu.Item>
       );
     },
-    renderTopToolbarCustomActions: ({ table }) => {
+    renderTopToolbarCustomActions: () => {
       const [
         createUserModal,
         { open: openCreateModal, close: closeCreateModal },

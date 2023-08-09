@@ -3,6 +3,7 @@ import {
   ColorSchemeProvider,
   MantineProvider,
 } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 import { useState } from 'react';
 import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
@@ -25,6 +26,7 @@ export function App() {
         withNormalizeCSS
       >
         <Provider store={store}>
+          <Notifications position="top-center" />
           <RouterProvider router={AppRoutes} />
         </Provider>
       </MantineProvider>

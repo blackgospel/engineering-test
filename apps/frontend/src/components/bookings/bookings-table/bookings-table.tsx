@@ -1,3 +1,4 @@
+import { IBookingSchema } from '@eurocamp/schema';
 import dayjs from 'dayjs';
 import {
   MantineReactTable,
@@ -5,7 +6,6 @@ import {
   type MRT_ColumnDef,
 } from 'mantine-react-table';
 import { useMemo } from 'react';
-import { IBookingSchema } from '../../../schema';
 
 interface IBookingTableProps {
   data: IBookingSchema[];

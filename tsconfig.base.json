@@ -16,6 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@eurocamp/schema": ["libs/schema/src/index.ts"],
       "@eurocamp/server": ["libs/server/src/index.ts"]
     }
   },

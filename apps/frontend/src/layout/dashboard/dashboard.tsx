@@ -15,7 +15,9 @@ import {
 } from '@mantine/core';
 import { IconMoonStars, IconSun } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Fallback } from '../../components';
 import { ROUTE_PATHS } from '../../routes/paths';
 
 export const DashboardLayout = () => {
@@ -140,7 +142,9 @@ export const DashboardLayout = () => {
         </Header>
       }
     >
-      <Outlet />
+      <ErrorBoundary FallbackComponent={Fallback}>
+        <Outlet />
+      </ErrorBoundary>
     </AppShell>
   );
 };

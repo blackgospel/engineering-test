@@ -1,23 +1,37 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
   IBookingAPI,
   IBookingSchema,
+  ICreateUserSchema,
   IParcAPI,
   IParcSchema,
   IUserAPI,
   IUserSchema,
-} from '../schema';
+} from '@eurocamp/schema';
+import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react';
+
+// Recreate the baseQuery with a retry function
+const staggeredBaseQuery = retry(fetchBaseQuery({ baseUrl: '/api' }), {
+  maxRetries: 5,
+});
 
 export const baseApi = createApi({
   reducerPath: 'baseApi',
   tagTypes: ['Users', 'Parcs', 'Bookings'],
-  baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
+  baseQuery: staggeredBaseQuery,
   endpoints: (builder) => ({
     getAllUsers: builder.query<IUserSchema[], void>({
       query: () => `/1/users`,
       transformResponse: (response: { data: IUserAPI }): IUserSchema[] =>
         response.data,
       providesTags: ['Users'],
+    }),
+    createUser: builder.mutation<void, ICreateUserSchema>({
+      query: ({ name, email }) => ({
+        url: `/1/users/`,
+        method: 'POST',
+        body: { name, email },
+      }),
+      invalidatesTags: ['Users'],
     }),
     deleteUser: builder.mutation<void, string>({
       query: (id) => ({ url: `/1/users/${id}`, method: 'DELETE' }),
@@ -43,4 +57,5 @@ export const {
   useGetAllParcsQuery,
   useGetAllBookingsQuery,
   useDeleteUserMutation,
+  useCreateUserMutation,
 } = baseApi;

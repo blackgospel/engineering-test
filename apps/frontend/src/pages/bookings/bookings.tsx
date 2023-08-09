@@ -1,6 +1,6 @@
+import { useGetAllBookingsQuery } from '@eurocamp/store';
 import { Box } from '@mantine/core';
 import { BookingsTable } from '../../components';
-import { useGetAllBookingsQuery } from '../../redux';
 
 export const BookingsPage = () => {
   const { data, isLoading, error } = useGetAllBookingsQuery();

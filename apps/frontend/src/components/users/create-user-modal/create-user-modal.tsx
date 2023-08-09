@@ -1,8 +1,8 @@
 import { ICreateUserSchema } from '@eurocamp/schema';
+import { useCreateUserMutation } from '@eurocamp/store';
 import { Button, Modal, ModalProps, Stack, TextInput } from '@mantine/core';
 import { hasLength, isEmail, useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
-import { useCreateUserMutation } from '../../../redux';
 
 type ICreateUserModalProps = Pick<ModalProps, 'opened' | 'onClose'>;
 
@@ -55,11 +55,13 @@ export const CreateUserModal: React.FC<ICreateUserModalProps> = ({
           <TextInput
             label="Name"
             placeholder="Enter a name..."
+            aria-label="new-user-name"
             {...form.getInputProps('name')}
           />
           <TextInput
             label="Email"
             placeholder="Enter an email..."
+            aria-label="new-user-email"
             {...form.getInputProps('email')}
           />
           <Button
@@ -68,6 +70,7 @@ export const CreateUserModal: React.FC<ICreateUserModalProps> = ({
             disabled={
               form.values.name.length < 4 && form.values.email.length < 5
             }
+            aria-label="new-user-submit"
             loading={isLoading}
           >
             Save

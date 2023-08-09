@@ -1,6 +1,6 @@
+import { useGetAllParcsQuery } from '@eurocamp/store';
 import { Box } from '@mantine/core';
 import { ParcsTable } from '../../components';
-import { useGetAllParcsQuery } from '../../redux';
 
 export const ParcsPage = () => {
   const { data, isLoading, error } = useGetAllParcsQuery();

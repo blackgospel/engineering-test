@@ -17,6 +17,7 @@ const staggeredBaseQuery = retry(fetchBaseQuery({ baseUrl: '/api' }), {
 export const baseApi = createApi({
   reducerPath: 'baseApi',
   tagTypes: ['Users', 'Parcs', 'Bookings'],
+  keepUnusedDataFor: process.env.NODE_ENV === 'test' ? 0 : 60,
   baseQuery: staggeredBaseQuery,
   endpoints: (builder) => ({
     getAllUsers: builder.query<IUserSchema[], void>({
@@ -27,7 +28,7 @@ export const baseApi = createApi({
     }),
     createUser: builder.mutation<void, ICreateUserSchema>({
       query: ({ name, email }) => ({
-        url: `/1/users/`,
+        url: `/1/users`,
         method: 'POST',
         body: { name, email },
       }),

@@ -1,3 +1,4 @@
+import { store } from '@eurocamp/store';
 import {
   ColorScheme,
   ColorSchemeProvider,
@@ -7,7 +8,6 @@ import { Notifications } from '@mantine/notifications';
 import { useState } from 'react';
 import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
-import { store } from '../redux';
 import { AppRoutes } from '../routes/routes';
 
 export function App() {

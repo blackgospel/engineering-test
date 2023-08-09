@@ -1,6 +1,6 @@
+import { useGetAllUsersQuery } from '@eurocamp/store';
 import { Box } from '@mantine/core';
 import { UsersTable } from '../../components';
-import { useGetAllUsersQuery } from '../../redux';
 
 export const UsersPage = () => {
   const { data, isLoading, error } = useGetAllUsersQuery();

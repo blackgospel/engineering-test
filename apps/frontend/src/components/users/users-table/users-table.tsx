@@ -1,4 +1,5 @@
 import { IUserSchema } from '@eurocamp/schema';
+import { useDeleteUserMutation } from '@eurocamp/store';
 import { Button, Menu } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconTrash } from '@tabler/icons-react';
@@ -8,7 +9,6 @@ import {
   type MRT_ColumnDef,
 } from 'mantine-react-table';
 import { useMemo } from 'react';
-import { useDeleteUserMutation } from '../../../redux';
 import { CreateUserModal } from '../create-user-modal';
 
 interface IUsersTableProps {
